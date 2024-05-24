@@ -1,0 +1,41 @@
+/* DBの作成　*/
+CREATE DATABASE mybookdb;
+use mybookdb;
+
+
+/* テーブルの作成 */
+/* bookinfo */
+CREATE TABLE bookinfo (
+isbn VARCHAR(20) PRIMARY KEY,
+title VARCHAR(100),
+price INTEGER
+)ENGINE=InnoDB;
+
+/* userinfo */
+CREATE TABLE userinfo (
+user VARCHAR(10) PRIMARY KEY,
+password VARCHAR(10),
+email VARCHAR(100),
+authority VARCHAR(1)
+)ENGINE=InnoDB;
+
+/* orderinfo */
+CREATE TABLE orderinfo (
+orderno INTEGER AUTO_INCREMENT PRIMARY KEY,
+user VARCHAR(20),
+isbn VARCHAR(20),
+quantity INTEGER ,
+date date,
+FOREIGN KEY (user) REFERENCES userinfo(user) on update cascade on delete cascade,
+FOREIGN KEY (isbn) REFERENCES bookinfo(isbn) on update cascade on delete cascade
+)ENGINE=InnoDB;
+
+/* サンプルデータの登録 */
+/* bookinfo */
+INSERT INTO bookinfo VALUES('0001','java',1001);
+INSERT INTO bookinfo VALUES('0002','c++',1002);
+INSERT INTO bookinfo VALUES('0003','ruby',1003);
+INSERT INTO bookinfo VALUES('0004','perl',1004);
+/* userinfo */
+INSERT INTO userinfo VALUES('test','test','test1@xxxx.com','1');
+INSERT INTO userinfo VALUES('tester','tester','test2@xxxx.com','2');
